@@ -1,15 +1,20 @@
-import org.junit.jupiter.api.Test;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class PathTest {
+import java.nio.file.Paths;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+class PathTest {
+
     @Test
-    void testCrossPlatformPath() {
-        Path path = Paths.get("target", "test-classes", "data.txt");
-        
-        System.out.println("Standardized Path: " + path.toString());
-        
-        assertNotNull(path.toString());
+    @DisplayName("Cố tình kiểm tra đường dẫn kiểu Windows")
+    void testWindowsSpecificPathSeparator() {
+        String path = Paths.get("target", "test-classes", "data.txt").toString();
+
+        System.out.println("Generated path: " + path);
+
+        assertTrue(
+                path.contains("\\"),
+                "Cố tình yêu cầu đường dẫn chứa dấu \\ kiểu Windows");
     }
 }

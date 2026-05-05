@@ -1,5 +1,6 @@
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.io.File;
 import java.nio.file.Paths;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -7,14 +8,15 @@ import org.junit.jupiter.api.Test;
 class PathTest {
 
     @Test
-    @DisplayName("Cố tình kiểm tra đường dẫn kiểu Windows")
-    void testWindowsSpecificPathSeparator() {
+    @DisplayName("Kiểm tra đường dẫn đa hệ điều hành")
+    void testCrossPlatformPathSeparator() {
         String path = Paths.get("target", "test-classes", "data.txt").toString();
 
-        System.out.println("Generated path: " + path);
+        String expectedPath =
+                "target" + File.separator + "test-classes" + File.separator + "data.txt";
 
-        assertTrue(
-                path.contains("\\"),
-                "Cố tình yêu cầu đường dẫn chứa dấu \\ kiểu Windows");
+        System.out.println("Cross-platform path: " + path);
+
+        assertEquals(expectedPath, path);
     }
 }
